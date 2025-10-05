@@ -1,0 +1,112 @@
+<div class="form-card">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Editar Producto' : 'Crear Producto' }}</h2>
+    <p>{{ isEditMode ? 'Modifica un item del menú.' : 'Añade un item del menú.' }}</p>
+    
+    <!-- Indicador de modo edición -->
+    <div *ngIf="isEditMode" class="editing-indicator">
+      <span class="badge badge-editing">
+        📝 Editando: {{ product.nombre || 'Sin nombre' }}
+      </span>
+    </div>
+  </div>
+
+  <form (ngSubmit)="saveProduct()" class="product-form" #productForm="ngForm">
+    <!-- Nombre del Plato -->
+    <div class="form-group">
+      <label class="form-label">Nombre del Plato</label>
+      <input 
+        type="text" 
+        [(ngModel)]="product.nombre"
+        name="nombre"
+        class="form-input"
+        placeholder="e.g., Lomo Saltado"
+        required
+        [disabled]="isSubmitting">
+    </div>
+
+    <!-- Descripción -->
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <textarea 
+        [(ngModel)]="product.descripcion"
+        name="descripcion"
+        class="form-textarea"
+        placeholder="Una breve descripción del plato"
+        rows="3"
+        required
+        [disabled]="isSubmitting"></textarea>
+    </div>
+
+    <!-- Precio -->
+    <div class="form-group">
+      <label class="form-label">Precio</label>
+      <div class="price-input-container">
+        <span class="currency-symbol">S/</span>
+        <input 
+          type="number" 
+          [(ngModel)]="product.precio"
+          name="precio"
+          class="form-input price-input"
+          placeholder="0.00"
+          step="0.01"
+          min="0"
+          required
+          [disabled]="isSubmitting">
+      </div>
+    </div>
+
+    <!-- Categoría -->
+    <div class="form-group">
+      <label class="form-label">Categoría</label>
+      <select 
+        [(ngModel)]="product.categoria"
+        name="categoria"
+        class="form-select"
+        required
+        [disabled]="isSubmitting">
+        <option value="" selected>Seleccione una categoría</option>
+        <option value="ENTRADA">Entradas</option>
+        <option value="PLATO_FUERTE">Platos Fuertes</option>
+        <option value="BEBIDA">Bebidas</option>
+        <option value="POSTRE">Postres</option>
+      </select>
+    </div>
+
+    <!-- Estado -->
+    <div class="form-group" *ngIf="isEditMode">
+      <label class="form-label">Estado</label>
+      <div class="status-display">
+        <span class="status-badge" [class.active]="product.activo">
+          {{ product.activo ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="form-actions">
+      <button *ngIf="isEditMode" 
+              type="button" 
+              class="btn-cancel" 
+              (click)="onCancel()"
+              [disabled]="isSubmitting">
+        Cancelar
+      </button>
+      <button type="submit" 
+              class="save-button"
+              [disabled]="isSubmitting || productForm.invalid">
+        <span *ngIf="isSubmitting" class="loading-spinner">⏳</span>
+        {{ isEditMode ? 'Actualizar Producto' : 'Guardar Producto' }}
+        {{ isSubmitting ? '...' : '' }}
+      </button>
+    </div>
+
+    <!-- Estado de carga -->
+    <div *ngIf="isSubmitting" class="loading-overlay">
+      <div class="loading-message">
+        <div class="spinner"></div>
+        <p>{{ isEditMode ? 'Actualizando producto...' : 'Creando producto...' }}</p>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,98 @@
+/* Estilos Globales y de Fondo */
+body {
+  margin: 0;
+  /* Fondo oscuro principal que se ve en la imagen */
+  background-color: #12151c; 
+  color: #e2e8f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------- HEADER Y FOOTER (Basado en la última solicitud) ---------------------- */
+.header {
+  background-color: #1a202c; 
+  border-bottom: 3px solid #667eea; /* Acento azul/morado */
+  padding: 15px 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header h1 {
+  color: #ffffff; 
+  margin: 0;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.footer {
+    background-color: #1a202c;
+    color: #a0aec0;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 12px;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #2d3748;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
+}
+
+
+/* ---------------------- LAYOUT DE DOS COLUMNAS (CRÍTICO) ---------------------- */
+
+.main-content-layout {
+  display: flex; /* Habilita Flexbox */
+  flex-grow: 1; 
+  max-width: 1400px; 
+  /* Centrar el contenedor y agregar margen inferior para el footer */
+  margin: 30px auto 70px; 
+  gap: 20px; /* Espacio entre las columnas */
+  padding: 0 20px; /* Padding lateral */
+}
+
+/* Estilo del panel de formulario (columna izquierda) */
+.form-panel-wrapper {
+  /* Fija el ancho del formulario, 400px o similar es buen punto de partida */
+  flex: 0 0 400px; 
+  /* Añadir el estilo de tarjeta blanca (aunque el componente form.component.css puede sobreescribirlo) */
+  /* background-color: white; */ 
+  border-radius: 8px;
+}
+
+/* Estilo del panel de lista (columna derecha, ocupa el espacio restante) */
+.list-panel-wrapper {
+  flex-grow: 1; /* Ocupa el espacio restante */
+  /* background-color: white; */
+  border-radius: 8px;
+}
+
+/* Estilos para el botón "Crear Nuevo Producto" */
+.controls {
+  text-align: right; 
+  margin-bottom: 20px;
+}
+
+.controls button {
+  padding: 10px 15px;
+  background-color: #667eea; /* Usamos el color de acento del header */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.controls button:hover {
+  background-color: #5a67d8; 
+}

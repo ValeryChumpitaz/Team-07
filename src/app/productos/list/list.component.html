@@ -1,0 +1,53 @@
+<div class="list-card">
+  <div class="list-header">
+  </div>
+
+  <div class="table-container">
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Los productos se cargarán dinámicamente desde Angular -->
+        <tr *ngFor="let producto of productos">
+          <td class="product-id">{{ producto.id }}</td>
+          <td class="product-name">{{ producto.nombre }}</td>
+          <td class="product-description">{{ producto.descripcion }}</td>
+          <td class="product-price">S/ {{ producto.precio }}</td>
+          <td>
+            <span class="category-badge">{{ producto.categoria }}</span>
+          </td>
+          <td>
+            <span class="status-badge" [class.active]="producto.activo" [class.inactive]="!producto.activo">
+              {{ producto.activo ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <!-- Icono Editar - Siempre visible -->
+            <button class="action-button edit-button" (click)="onEdit(producto)" title="Editar">
+              <span class="material-icons">edit</span>
+            </button>
+            
+            <!-- Icono Eliminar - Solo para productos activos -->
+            <button *ngIf="producto.activo" class="action-button delete-button" (click)="onDelete(producto.id)" title="Eliminar">
+              <span class="material-icons">delete</span>
+            </button>
+            
+            <!-- Icono Restaurar - Solo para productos inactivos -->
+            <button *ngIf="!producto.activo" class="action-button restore-button" (click)="onRestore(producto.id)" title="Restaurar">
+              <span class="material-icons">restore</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

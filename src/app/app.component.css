@@ -1,0 +1,261 @@
+/* Encabezado */
+.app-header {
+  background: #1f2937;
+  color: #d1d5db;
+  padding: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #374151;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #1259a1;
+}
+
+.restaurant-name {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  color: #d1d5db;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #1259a1;
+}
+
+.nav-item.active .nav-link {
+  color: #1259a1;
+  font-weight: bold;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-icon {
+  color: #9ca3af;
+  font-size: 1.25rem;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+/* Contenido Principal */
+.main-content {
+  min-height: calc(100vh - 140px);
+  background-color: #111921;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 28% 72%; /* Formulario más angosto, tabla más ancha */
+  gap: 4rem; /* Mucho más espacio entre formulario y tabla */
+  align-items: start;
+}
+
+.form-column {
+  grid-column: 1;
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  width: 100%;
+  max-height: fit-content;
+  margin-right: 2rem; /* Espacio adicional a la derecha */
+}
+
+.list-column {
+  grid-column: 2;
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  width: 100%;
+  max-height: 75vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-left: 1rem; /* Espacio adicional a la izquierda */
+}
+
+/* Personalizar la barra de desplazamiento */
+.list-column::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.list-column::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 4px;
+}
+
+.list-column::-webkit-scrollbar-thumb {
+  background: #1259a1;
+  border-radius: 4px;
+}
+
+.list-column::-webkit-scrollbar-thumb:hover {
+  background: #0f4a8a;
+}
+
+/* Estilos para el header de la lista */
+.list-header {
+  margin-bottom: 1.5rem;
+}
+
+.list-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d1d5db;
+  margin-bottom: 0.25rem;
+}
+
+.list-header p {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+/* Estilos para la tabla */
+.table-container {
+  width: 100%;
+  min-width: 850px; /* Ancho mínimo más grande para la tabla */
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1f2937;
+}
+
+.product-table th {
+  background: #374151;
+  color: #d1d5db;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-bottom: 2px solid #4b5563;
+}
+
+.product-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #374151;
+  color: #d1d5db;
+  font-size: 0.875rem;
+}
+
+.product-table tr:hover {
+  background: #374151;
+}
+
+/* Pie de página */
+.app-footer {
+  background: #111921;
+  color: #9ca3af;
+  padding: 1rem 0;
+  border-top: 1px solid #374151;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .content-wrapper {
+    grid-template-columns: 32% 68%;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-menu {
+    gap: 1rem;
+  }
+  
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .form-column, .list-column {
+    grid-column: 1;
+    max-height: none;
+    overflow-y: visible;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  .table-container {
+    min-width: auto;
+    overflow-x: auto;
+  }
+}

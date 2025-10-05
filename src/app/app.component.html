@@ -1,0 +1,66 @@
+<!-- Encabezado -->
+<header class="app-header">
+  <div class="header-content">
+    <div class="logo-section">
+      <h1 class="restaurant-name">La Sazón de Panchita</h1>
+    </div>
+    <nav class="navigation">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#" class="nav-link">Órdenes</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Mesas</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Personal</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Clientes</a></li>
+        <li class="nav-item active"><a href="#" class="nav-link">Productos</a></li>
+      </ul>
+    </nav>
+    <div class="header-badge">
+      <span class="badge">2</span>
+    </div>
+  </div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="main-content">
+  <div class="container">
+  
+
+    <!-- Botón para crear nuevo producto -->
+    <div class="create-new-section" *ngIf="isEditing">
+      <button (click)="onShowForm()" class="btn-new-product">
+        ➕ Crear Nuevo Producto
+      </button>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Formulario de Productos -->
+      <div class="form-column">
+        <app-form
+          [productToEdit]="selectedProduct"
+          (productSaved)="onProductSaved()"
+          (cancelForm)="onCancelForm()">
+        </app-form>
+      </div>
+      
+      <!-- Lista de Productos -->
+      <div class="list-column">
+        <div class="list-header">
+          <h2>Listado de Productos</h2>
+          <p>Gestiona los ítems existentes en tu menú.</p>
+        </div>
+        <app-list 
+          (editProduct)="onEditProduct($event)"
+          (refreshList)="onRefreshList()">
+        </app-list>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Pie de página -->
+<footer class="app-footer">
+  <div class="footer-content">
+    <p class="copyright">
+      © 2024 La Sazón de Panchita. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
