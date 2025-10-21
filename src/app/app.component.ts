@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Product } from './productos/models/producto.model';
 import { ListComponent } from './productos/list/list.component';
 import { FormComponent } from './productos/form/form.component';
+import { LayoutComponent } from './layout/layout.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { ProductService } from './productos/services/producto.service';
@@ -13,7 +14,8 @@ import { ProductService } from './productos/services/producto.service';
   standalone: true, 
   imports: [
     ListComponent, 
-    FormComponent, 
+    FormComponent,
+    LayoutComponent, 
     CommonModule,  
     FormsModule,   
   ]

@@ -10,7 +10,7 @@ body {
   flex-direction: column;
 }
 
-/* ---------------------- HEADER Y FOOTER (Basado en la última solicitud) ---------------------- */
+/* ---------------------- HEADER Y FOOTER ---------------------- */
 .header {
   background-color: #1a202c; 
   border-bottom: 3px solid #667eea; /* Acento azul/morado */
@@ -95,4 +95,21 @@ body {
 
 .controls button:hover {
   background-color: #5a67d8; 
+}
+/* RESET GLOBAL DE Z-INDEX */
+app-sidebar {
+  z-index: 300 !important;
+  position: fixed !important;
+}
+
+app-form-component,
+form-component,
+.form-card,
+.form-section {
+  z-index: 100 !important;
+  position: relative !important;
+}
+
+app-header {
+  z-index: 400 !important;
 }

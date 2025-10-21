@@ -1,0 +1,17 @@
+<div class="layout-container">
+  <!-- Header con sidebar integrado -->
+  <app-header (sidebarToggle)="toggleSidebar()"></app-header>
+
+  <!-- Sidebar como hijo del header -->
+  <div class="header-sidebar-container">
+    <app-sidebar [class.collapsed]="isSidebarCollapsed"></app-sidebar>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="main-content-wrapper">
+    <main class="main-content">
+      <ng-content></ng-content>
+    </main>
+    <app-footer></app-footer>
+  </div>
+</div>

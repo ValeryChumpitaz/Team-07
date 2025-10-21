@@ -1,0 +1,36 @@
+<aside class="app-sidebar" [class.collapsed]="collapsed">
+  <div class="sidebar-header">
+    <div class="logo-section">
+      <img src="app/assets/logo.png" alt="Logo" class="logo-icon">
+      <h1 class="restaurant-name">La Sazón de Panchita</h1>
+    </div>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="sidebar-nav">
+    <ul class="nav-menu">
+      <li *ngFor="let item of menuItems" 
+          [class]="getMenuItemClass(item)"
+          (click)="onMenuItemClick(item)">
+        <a [routerLink]="item.path" 
+           class="nav-link"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: false }">
+          <span class="nav-icon">{{ item.icon }}</span>
+          <span class="nav-text">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Perfil de usuario en el sidebar -->
+  <div class="sidebar-footer">
+    <div class="user-profile">
+      <img src="app/assets/hero.png" alt="Avatar" class="user-avatar">
+      <div class="user-info">
+        <span class="user-name">{{ userInfo.name }}</span>
+        <span class="user-role">{{ userInfo.role }}</span>
+      </div>
+    </div>
+  </div>
+</aside>

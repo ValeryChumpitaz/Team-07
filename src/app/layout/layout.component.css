@@ -1,0 +1,101 @@
+/* RESET FORZADO */
+app-sidebar {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translateX(-100%) !important;
+}
+
+app-sidebar:not(.collapsed) {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+/* LAYOUT CON Z-INDEX FORZADO */
+.layout-container {
+  min-height: 100vh;
+  background-color: #111921;
+  position: relative;
+}
+
+/* SIDEBAR - DELANTE DE TODO - NO TRANSPARENTE */
+.app-sidebar {
+  position: fixed !important;
+  left: -280px !important;
+  top: 80px !important;
+  width: 280px !important;
+  height: calc(100vh - 80px) !important;
+  background: #1f2937 !important; /* Fondo sólido */
+  border-right: 1px solid #374151 !important;
+  z-index: 9999 !important;
+  transition: left 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-y: auto !important;
+  opacity: 1 !important; /* Eliminar transparencia */
+}
+
+.app-sidebar:not(.collapsed) {
+  left: 0 !important;
+}
+
+/* HEADER - ENCIMA DEL SIDEBAR */
+.app-header {
+  z-index: 10000 !important;
+  position: relative !important;
+}
+
+/* CONTENIDO - DETRÁS DEL SIDEBAR */
+.main-content-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  z-index: 1 !important;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #111921;
+  padding: 2rem;
+  width: 100%;
+  position: relative;
+  z-index: 1 !important;
+  /* Eliminar cualquier espacio o barra espaciadora */
+  margin: 0;
+  max-width: none;
+}
+
+.app-footer {
+  position: relative;
+  z-index: 1 !important;
+  /* Eliminar espacio debajo del footer */
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Eliminar cualquier barra espaciadora que ocupe todo el ancho */
+.spacer, .empty-space, .whitespace {
+  display: none !important;
+}
+
+/* Asegurar que no hay elementos que ocupen ancho innecesario */
+.container, .wrapper, .content {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Eliminar barra espaciadora debajo del footer */
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.layout-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}

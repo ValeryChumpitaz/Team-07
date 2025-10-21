@@ -1,10 +1,10 @@
 // models/producto.model.ts
 export interface Product {
   id: number;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  categoria: string;
-  activo: boolean;
-  codigo?: string; // Agregar campo opcional para el código
+  name: string; // Cambiado de 'nombre'
+  description: string; // Cambiado de 'descripcion'
+  price: number; // Cambiado de 'precio'
+  category: string; // Cambiado de 'categoria'
+  active: boolean; // Cambiado de 'activo'
+  productCode?: string; // Cambiado de 'codigo'
 }

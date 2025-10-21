@@ -1,0 +1,23 @@
+<header class="app-header">
+  <div class="header-content">
+    <!-- Botón para toggle del sidebar -->
+    <button class="sidebar-toggle" (click)="toggleSidebar()">
+      <span class="toggle-icon" [class.collapsed]="isSidebarCollapsed">☰</span>
+    </button>
+
+    <div class="header-title">
+      <h2>Panel de Control</h2>
+      <p>Bienvenido al sistema de gestión del restaurante</p>
+    </div>
+    
+    <div class="header-actions">
+      <button class="header-btn">
+        <span class="btn-icon">🔔</span>
+        <span class="btn-badge">3</span>
+      </button>
+      <button class="header-btn">
+        <span class="btn-icon">⚙️</span>
+      </button>
+    </div>
+  </div>
+</header>

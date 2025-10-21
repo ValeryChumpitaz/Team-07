@@ -1,5 +1,12 @@
 <div class="list-card">
   <div class="list-header">
+    <!-- ↓↓↓ NUEVO BOTÓN VER INACTIVOS ↓↓↓ -->
+    <button *ngIf="productosInactivos.length > 0" 
+            (click)="abrirModalInactivos()" 
+            class="btn-ver-inactivos">
+      <span class="material-icons">visibility</span>
+      Ver Productos Inactivos ({{ productosInactivos.length }})
+    </button>
   </div>
 
   <div class="table-container">
@@ -16,19 +23,18 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Los productos se cargarán dinámicamente desde Angular -->
-        <tr *ngFor="let producto of productos">
+        <!-- ↓↓↓ CAMBIO: usar productosActivos en lugar de productos ↓↓↓ -->
+        <tr *ngFor="let producto of productosActivos">
           <td class="product-id">{{ producto.id }}</td>
-          <td class="product-name">{{ producto.nombre }}</td>
-          <td class="product-description">{{ producto.descripcion }}</td>
-          <td class="product-price">S/ {{ producto.precio }}</td>
+          <td class="product-name">{{ producto.name }}</td>
+          <td class="product-description">{{ producto.description }}</td>
+          <td class="product-price">S/ {{ producto.price }}</td>
           <td>
-            <span class="category-badge">{{ producto.categoria }}</span>
+            <span class="category-badge">{{ producto.category }}</span>
           </td>
           <td>
-            <span class="status-badge" [class.active]="producto.activo" [class.inactive]="!producto.activo">
-              {{ producto.activo ? 'Activo' : 'Inactivo' }}
-            </span>
+            <!-- ↓↓↓ CAMBIO: siempre será activo en esta lista ↓↓↓ -->
+            <span class="status-badge active">Activo</span>
           </td>
           <td class="actions-cell">
             <!-- Icono Editar - Siempre visible -->
@@ -37,17 +43,76 @@
             </button>
             
             <!-- Icono Eliminar - Solo para productos activos -->
-            <button *ngIf="producto.activo" class="action-button delete-button" (click)="onDelete(producto.id)" title="Eliminar">
+            <button class="action-button delete-button" (click)="onDelete(producto.id)" title="Eliminar">
               <span class="material-icons">delete</span>
             </button>
             
-            <!-- Icono Restaurar - Solo para productos inactivos -->
-            <button *ngIf="!producto.activo" class="action-button restore-button" (click)="onRestore(producto.id)" title="Restaurar">
-              <span class="material-icons">restore</span>
-            </button>
+            <!-- ↓↓↓ QUITAR: botón restaurar ya no es necesario aquí ↓↓↓ -->
           </td>
         </tr>
       </tbody>
     </table>
+    
+    <!-- ↓↓↓ MENSAJE CUANDO NO HAY PRODUCTOS ACTIVOS ↓↓↓ -->
+    <div *ngIf="productosActivos.length === 0" class="sin-productos">
+      No hay productos activos en el menú
+    </div>
+  </div>
+</div>
+
+<!-- ↓↓↓ NUEVO MODAL PARA PRODUCTOS INACTIVOS ↓↓↓ -->
+<div *ngIf="mostrarModalInactivos" class="modal-overlay" (click)="cerrarModalInactivos()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>📁 Productos Inactivos</h3>
+      <button (click)="cerrarModalInactivos()" class="btn-cerrar-modal">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="table-container">
+        <table class="products-table modal-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosInactivos" class="producto-inactivo">
+              <td class="product-id">{{ producto.id }}</td>
+              <td class="product-name">{{ producto.name }}</td>
+              <td class="product-description">{{ producto.description }}</td>
+              <td class="product-price">S/ {{ producto.price }}</td>
+              <td>
+                <span class="category-badge">{{ producto.category }}</span>
+              </td>
+              <td class="actions-cell">
+                <button class="action-button restore-button" 
+                        (click)="onRestoreFromModal(producto.id)" 
+                        title="Restaurar">
+                  <span class="material-icons">restore</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="productosInactivos.length === 0" class="sin-productos">
+          No hay productos inactivos
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button (click)="cerrarModalInactivos()" class="btn-salir">
+        <span class="material-icons">arrow_back</span>
+        Salir de la Lista
+      </button>
+    </div>
   </div>
 </div>

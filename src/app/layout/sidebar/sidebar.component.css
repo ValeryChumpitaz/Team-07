@@ -1,0 +1,160 @@
+/* Sidebar - Solo estilos internos */
+.app-sidebar {
+  display: flex;
+  flex-direction: column;
+  color: #d1d5db;
+  background: #1f2937 !important; /* Fondo sólido no transparente */
+  opacity: 1 !important;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid #374151;
+  background: #111921;
+  flex-shrink: 0;
+}
+
+.sidebar-header .logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-header .logo-icon {
+  font-size: 1.75rem;
+}
+
+.sidebar-header .restaurant-name {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: #d1d5db;
+}
+
+/* Navegación del Sidebar */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+  color: #1259a1;
+  background: rgba(18, 89, 161, 0.1);
+  border-left-color: #1259a1;
+}
+
+.nav-item.active .nav-link {
+  color: #1259a1;
+  background: rgba(18, 89, 161, 0.15);
+  font-weight: 600;
+  border-left-color: #1259a1;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-text {
+  flex: 1;
+}
+
+/* Footer del Sidebar */
+.sidebar-footer {
+  padding: 1.25rem;
+  border-top: 1px solid #374151;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.user-profile:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #d1d5db;
+  margin: 0;
+}
+
+.user-role {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Eliminar barra espaciadora que ocupa todo el ancho */
+.app-sidebar {
+  width: 280px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}

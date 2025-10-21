@@ -22,12 +22,12 @@ export class ProductService {
     return this.http.get<any[]>(this.baseUrl).pipe(
       map(products => products.map(product => ({
         id: product.id,
-        nombre: product.nombre,
-        descripcion: product.descripcion || '',
-        precio: product.precio,
-        categoria: product.categoria,
-        activo: product.estado === 'ACTIVO',
-        codigo: product.codigoProducto
+        name: product.name, // Cambiado
+        description: product.description || '', // Cambiado
+        price: product.price, // Cambiado
+        category: product.category, // Cambiado
+        active: product.status === 'ACTIVO', // Cambiado
+        productCode: product.productCode // Cambiado
       })))
     );
   }
@@ -35,10 +35,10 @@ export class ProductService {
   // ✅ CREAR
   createProduct(productData: any): Observable<any> {
     const dataToSend = {
-      nombre: productData.nombre,
-      descripcion: productData.descripcion,
-      precio: productData.precio,
-      categoria: productData.categoria
+      name: productData.name, // Cambiado
+      description: productData.description, // Cambiado
+      price: productData.price, // Cambiado
+      category: productData.category // Cambiado
     };
 
     console.log('🚀 CREAR - Enviando:', dataToSend);
@@ -55,12 +55,12 @@ export class ProductService {
   // ✅ EDITAR
   updateProduct(id: number, productData: any): Observable<any> {
     const dataToSend = {
-      codigoProducto: productData.codigo || `PROD${id.toString().padStart(3, '0')}`,
-      nombre: productData.nombre,
-      descripcion: productData.descripcion,
-      precio: productData.precio,
-      categoria: productData.categoria,
-      estado: productData.activo ? 'ACTIVO' : 'INACTIVO'
+      productCode: productData.productCode || `PROD${id.toString().padStart(3, '0')}`, // Cambiado
+      name: productData.name, // Cambiado
+      description: productData.description, // Cambiado
+      price: productData.price, // Cambiado
+      category: productData.category, // Cambiado
+      status: productData.active ? 'ACTIVO' : 'INACTIVO' // Cambiado
     };
 
     console.log('✏️ EDITAR - Enviando:', dataToSend);
@@ -121,12 +121,12 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
       map(product => ({
         id: product.id,
-        nombre: product.nombre,
-        descripcion: product.descripcion || '',
-        precio: product.precio,
-        categoria: product.categoria,
-        activo: product.estado === 'ACTIVO',
-        codigo: product.codigoProducto
+        name: product.name, // Cambiado
+        description: product.description || '', // Cambiado
+        price: product.price, // Cambiado
+        category: product.category, // Cambiado
+        active: product.status === 'ACTIVO', // Cambiado
+        productCode: product.productCode // Cambiado
       }))
     );
   }
@@ -138,10 +138,10 @@ export class ProductService {
     return this.getProductos().pipe(
       map(productos => {
         const productosTemporales = productos.filter(p => 
-          p.codigo?.includes('TEMP') || 
-          p.nombre?.includes('Test') ||
-          p.nombre?.includes('TEST') ||
-          p.nombre?.includes('Prueba')
+          p.productCode?.includes('TEMP') || 
+          p.name?.includes('Test') ||
+          p.name?.includes('TEST') ||
+          p.name?.includes('Prueba')
         );
         
         console.log('🗑️ Productos temporales encontrados:', productosTemporales.length);

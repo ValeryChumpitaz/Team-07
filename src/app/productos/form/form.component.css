@@ -1,34 +1,46 @@
-.form-card {
-  background: #2d3748;
-  border-radius: 8px;
-  padding: 20px;
-  color: #e2e8f0;
-  height: fit-content;
-  width: 100%;
-  max-width: 380px; /* Ancho exacto fijo */
-  box-sizing: border-box;
-  margin-left: 0;
+/* FORZAR que el formulario esté DETRÁS */
+:host {
+  display: block;
+  position: relative;
+  z-index: 1 !important;
 }
 
+.form-card {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 2rem;
+  color: #d1d5db;
+  height: fit-content;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin-left: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1 !important;
+}
+
+/* MANTENER todos tus otros estilos del formulario... */
 .form-header h2 {
   color: #ffffff;
-  margin-bottom: 6px;
-  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .form-header p {
-  color: #a0aec0;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: #9ca3af;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .product-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .form-group {
@@ -37,34 +49,39 @@
 }
 
 .form-label {
-  color: #a0aec0;
+  color: #d1d5db;
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 0.9rem;
 }
 
 .form-input, .form-textarea, .form-select {
-  background-color: #4a5568;
-  border: 1px solid #718096;
-  border-radius: 5px;
-  padding: 10px 12px;
+  background-color: #111921;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 12px 16px;
   color: #e2e8f0;
   font-size: 14px;
   width: 100%;
   box-sizing: border-box;
   resize: none;
   font-family: inherit;
+  transition: all 0.3s ease;
 }
 
 .form-input::placeholder, .form-textarea::placeholder {
-  color: #a0aec0;
+  color: #6b7280;
   font-size: 14px;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+  border-color: #1259a1;
+  box-shadow: 0 0 0 2px rgba(18, 89, 161, 0.2);
+}
+
+.form-input:hover, .form-textarea:hover, .form-select:hover {
+  border-color: #4b5563;
 }
 
 .price-input-container {
@@ -76,59 +93,241 @@
 
 .currency-symbol {
   position: absolute;
-  left: 12px;
-  color: #a0aec0;
+  left: 16px;
+  color: #9ca3af;
   font-weight: 500;
   font-size: 14px;
   z-index: 1;
 }
 
 .price-input {
-  padding-left: 35px !important;
+  padding-left: 40px !important;
 }
 
 .form-textarea {
-  min-height: 80px;
-  max-height: 100px;
+  min-height: 100px;
+  max-height: 120px;
   overflow-y: auto;
+  line-height: 1.5;
 }
 
 .status-display {
-  padding: 10px 0;
+  padding: 12px 0;
+  border-top: 1px solid #374151;
+  margin-top: 8px;
 }
 
-.status-badge.active {
-  background-color: #48bb78;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
+.status-badge {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #10b981;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   font-weight: 500;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.save-button {
-  background-color: #4299e1;
-  color: white;
+.status-badge::before {
+  content: "●";
+  font-size: 8px;
+  color: #10b981;
+}
+
+/* Botones mejorados */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-actions button {
+  flex: 1;
+  padding: 14px 20px;
   border: none;
-  border-radius: 5px;
-  padding: 12px 16px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 10px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-cancel {
+  background-color: #374151;
+  color: #d1d5db;
+  border: 1px solid #4b5563;
+}
+
+.btn-cancel:hover {
+  background-color: #4b5563;
+  border-color: #6b7280;
+  transform: translateY(-1px);
+}
+
+.btn-cancel:disabled {
+  background-color: #374151;
+  color: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.save-button {
+  background-color: #1259a1;
+  color: white;
+  border: 1px solid #1259a1;
 }
 
 .save-button:hover {
-  background-color: #3182ce;
+  background-color: #0f4a8a;
+  border-color: #0f4a8a;
+  transform: translateY(-1px);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+.save-button:disabled {
+  background-color: #374151;
+  border-color: #374151;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Estados de validación */
+.form-input.ng-invalid.ng-touched,
+.form-textarea.ng-invalid.ng-touched,
+.form-select.ng-invalid.ng-touched {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Loading states */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(31, 41, 55, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  z-index: 101; /* Por encima del formulario pero debajo del sidebar */
+}
+
+.loading-message {
+  text-align: center;
+  color: #d1d5db;
+}
+
+.spinner {
+  border: 3px solid #374151;
+  border-top: 3px solid #1259a1;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive mejorado */
+@media (max-width: 1024px) {
   .form-card {
     max-width: 100%;
-    margin-left: 0;
+    margin: 0 auto;
   }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .form-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .form-actions button {
+    padding: 12px 16px;
+  }
+}
+
+/* Animaciones suaves */
+.form-card {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Eliminar barra espaciadora debajo del footer */
+.app-footer {
+  position: relative;
+  z-index: 1 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+
+.layout-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Eliminar espacios específicos del footer */
+.app-footer * {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Forzar que no haya espacio debajo del último elemento */
+.app-footer > :last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Eliminar cualquier espacio que cause scroll horizontal */
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
 }

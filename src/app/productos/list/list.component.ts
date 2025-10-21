@@ -12,6 +12,9 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 })
 export class ListComponent implements OnInit {
   productos: Product[] = [];
+  productosActivos: Product[] = []; // ← NUEVA variable para solo activos
+  productosInactivos: Product[] = [];
+  mostrarModalInactivos: boolean = false;
 
   @Output() editProduct = new EventEmitter<Product>();
   @Output() refreshList = new EventEmitter<void>();
@@ -29,6 +32,9 @@ export class ListComponent implements OnInit {
       next: (data) => {
         console.log('✅ Productos cargados:', data);
         this.productos = data;
+        // ↓↓↓ FILTRAR ACTIVOS E INACTIVOS ↓↓↓
+        this.productosActivos = data.filter(p => p.active); // Cambiado
+        this.productosInactivos = data.filter(p => !p.active); // Cambiado
       },
       error: (error) => {
         console.error('❌ Error cargando productos:', error);
@@ -36,6 +42,50 @@ export class ListComponent implements OnInit {
       }
     });
   }
+
+  // ↓↓↓ NUEVOS MÉTODOS PARA EL MODAL ↓↓↓
+  abrirModalInactivos(): void {
+    this.mostrarModalInactivos = true;
+  }
+
+  cerrarModalInactivos(): void {
+    this.mostrarModalInactivos = false;
+  }
+
+  onRestoreFromModal(id: number): void {
+    console.log('🔄 Restaurando desde modal, ID:', id);
+    
+    this.productService.restoreProduct(id).subscribe({
+      next: (response: any) => {
+        console.log('✅ Producto restaurado desde modal');
+        
+        // ✅ ACTUALIZAR LISTAS LOCALES
+        const productoIndex = this.productos.findIndex(p => p.id === id);
+        if (productoIndex !== -1) {
+          this.productos[productoIndex].active = true; // Cambiado
+          // Quitar de inactivos y agregar a activos
+          const productoRestaurado = this.productosInactivos.find(p => p.id === id);
+          this.productosInactivos = this.productosInactivos.filter(p => p.id !== id);
+          if (productoRestaurado) {
+            this.productosActivos.push({...productoRestaurado, active: true}); // Cambiado
+          }
+        }
+        
+        alert(response.message || 'Producto restaurado correctamente');
+        
+        // Cerrar modal si no hay más inactivos
+        if (this.productosInactivos.length === 0) {
+          this.cerrarModalInactivos();
+        }
+      },
+      error: (error) => {
+        console.error('❌ Error restaurando desde modal:', error);
+        alert('Error al restaurar producto: ' + (error.error?.message || error.message));
+        this.loadProductos();
+      }
+    });
+  }
+  // ↑↑↑ FIN NUEVOS MÉTODOS ↑↑↑
 
   onEdit(producto: Product) {
     console.log('✏️ Editando producto:', producto);
@@ -57,11 +107,16 @@ export class ListComponent implements OnInit {
         next: (response: any) => {
           console.log('✅ List: Eliminación COMPLETADA');
 
-          // ✅ ACTUALIZAR ESTADO LOCALMENTE sin recargar
+          // ✅ ACTUALIZAR LISTAS LOCALES
           const productoIndex = this.productos.findIndex(p => p.id === id);
           if (productoIndex !== -1) {
-            this.productos[productoIndex].activo = false;
-            console.log('🔄 Estado actualizado localmente - Producto ahora INACTIVO');
+            this.productos[productoIndex].active = false; // Cambiado
+            // Quitar de activos y agregar a inactivos
+            const productoEliminado = this.productosActivos.find(p => p.id === id);
+            this.productosActivos = this.productosActivos.filter(p => p.id !== id);
+            if (productoEliminado) {
+              this.productosInactivos.push({...productoEliminado, active: false}); // Cambiado
+            }
           }
 
           alert(response.message || 'Producto eliminado correctamente');
@@ -69,8 +124,6 @@ export class ListComponent implements OnInit {
         error: (error) => {
           console.error('❌ List: Error en eliminación:', error);
           alert('Error al eliminar producto: ' + (error.error?.message || error.message));
-
-          // ❌ Si hay error, recargar la lista completa
           this.loadProductos();
         }
       });
@@ -84,11 +137,16 @@ export class ListComponent implements OnInit {
       next: (response: any) => {
         console.log('✅ List: Restauración COMPLETADA');
 
-        // ✅ ACTUALIZAR ESTADO LOCALMENTE sin recargar
+        // ✅ ACTUALIZAR LISTAS LOCALES
         const productoIndex = this.productos.findIndex(p => p.id === id);
         if (productoIndex !== -1) {
-          this.productos[productoIndex].activo = true;
-          console.log('🔄 Estado actualizado localmente - Producto ahora ACTIVO');
+          this.productos[productoIndex].active = true; // Cambiado
+          // Quitar de inactivos y agregar a activos
+          const productoRestaurado = this.productosInactivos.find(p => p.id === id);
+          this.productosInactivos = this.productosInactivos.filter(p => p.id !== id);
+          if (productoRestaurado) {
+            this.productosActivos.push({...productoRestaurado, active: true}); // Cambiado
+          }
         }
 
         alert(response.message || 'Producto restaurado correctamente');
@@ -96,8 +154,6 @@ export class ListComponent implements OnInit {
       error: (error) => {
         console.error('❌ List: Error en restauración:', error);
         alert('Error al restaurar producto: ' + (error.error?.message || error.message));
-
-        // ❌ Si hay error, recargar la lista completa
         this.loadProductos();
       }
     });
